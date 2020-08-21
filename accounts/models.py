@@ -8,3 +8,4 @@ class User(AbstractUser):
     bio = models.TextField(blank=True)
 
 
+ 

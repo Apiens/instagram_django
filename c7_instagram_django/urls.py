@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 from django.conf import settings
 from django.views.generic import TemplateView
@@ -21,10 +22,15 @@ from django.views.generic import TemplateView
 # for saving static files during development
 from django.conf.urls.static import static
 
+#login_required
+# def root(request):
+#     return render(request, "root.html")
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
-    path('', TemplateView.as_view(template_name='root.html'), name='root')
+    path('', login_required(TemplateView.as_view(template_name='root.html')), name='root')
 ]
 
 if settings.DEBUG:
