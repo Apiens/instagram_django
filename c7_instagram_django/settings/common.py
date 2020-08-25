@@ -30,6 +30,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+ADMINS = [
+    ('Jaeho Lee', 'admin@djangostagram.net'),
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,6 +47,7 @@ INSTALLED_APPS = [
     #Third Apps
     'debug_toolbar',
     'bootstrap4',
+    'django_pydenticon',
     #Local Apps
     'accounts',
 ]
@@ -136,3 +141,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+
+#EMAIL with Send Grid
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+#try it in shell
+# from django.core.mail import send_mail
+# send_mail('Subject here', 'Here is the message.', 'from@example.com', ['to@example.com'], fail_silently=False)
+
+WELCOME_EMAIL_SENDER = 'admin@djangostagram.net'
