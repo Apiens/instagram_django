@@ -10,7 +10,10 @@ from .forms import SignupForm, ProfileForm, PasswordChangeForm
 
 # Create your views here.
 
-login = LoginView.as_view(template_name="accounts/login_form.html")
+login = LoginView.as_view(template_name="accounts/login_form.html",
+                          redirect_field_name = 'root',
+                          redirect_authenticated_user=True,
+                          success_url= 'root')
 
 def logout(request):
     messages.success(request, '로그아웃 되었습니다.')

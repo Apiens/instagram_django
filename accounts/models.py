@@ -4,6 +4,7 @@ from django.core.validators import RegexValidator
 from django.conf import settings
 from django.db import models
 from django.template.loader import render_to_string
+from django.shortcuts import resolve_url
 
 # Create your models here.
 
@@ -22,7 +23,17 @@ class User(AbstractUser):
     profile_image = models.ImageField(blank=True, upload_to="accounts/profile_image/%Y/%m/%d/%H/%M/%S",
                                       help_text="360px * 360px 이하의 png/jpg 파일을 업로드 해주세요.")
     # django-imagekit 라이브러리 사용해서 서버단에서 편하게 처리 가능.
+    
+    @property
+    def name(self):
+        return f"{self.first_name} {self.last_name}"
 
+    @property
+    def profile_image_url(self):
+        if self.profile_image:
+            return self.profile_image
+        else:
+            return resolve_url("pydenticon_image", self.username)
 
     def send_welcome_email(self):
         subject = render_to_string("accounts/welcome_email_subject.txt", {

@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_pydenticon',
     #Local Apps
     'accounts',
+    'instagram',
 ]
 
 MIDDLEWARE = [
@@ -156,3 +157,5 @@ EMAIL_USE_TLS = True
 # send_mail('Subject here', 'Here is the message.', 'from@example.com', ['to@example.com'], fail_silently=False)
 
 WELCOME_EMAIL_SENDER = 'admin@djangostagram.net'
+
+LOGIN_REDIRECT_URL = 'root'

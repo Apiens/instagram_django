@@ -7,7 +7,7 @@
         </div>
     {% endif %}
     <div class="card-body">
-        {% if form%}
+        {% if form %}
             <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {% bootstrap_form form %}
@@ -15,6 +15,11 @@
                 <button type="submit" class="btn btn-primary">
                     {{ submit_label|default:"Submit"}}
                 </button>
+                {% if link_button %}
+                <a href= {% url "signup" %} class="btn btn-primary">
+                    {{ link_button|default:"Link"}}
+                <a/>
+                {% endif %}
             {% endbuttons %}
             </form>        
         {% else %}
